@@ -1,0 +1,99 @@
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
+
+export default function Home() {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white p-5 overflow-auto">
+      <motion.h1 
+        initial={{ opacity: 0, y: -20 }} 
+        animate={{ opacity: 1, y: 0 }} 
+        transition={{ duration: 0.5 }}
+        className="text-4xl font-bold mb-4"
+      >
+        <span className="text-gray-400">&lt;Rahul Vinayak/&gt;</span>
+      </motion.h1>
+      
+      <motion.h2 
+        initial={{ opacity: 0, y: -10 }} 
+        animate={{ opacity: 1, y: 0 }} 
+        transition={{ duration: 0.6 }}
+        className="text-3xl font-bold mb-4"
+      >
+        Hi, Welcome to my website!
+      </motion.h2>
+      
+      <motion.p
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        className="text-lg text-gray-400 text-center"
+      >
+        Full Stack Software Developer 🚀 experience building and maintaining large-scale Web and Mobile applications
+      </motion.p>
+      
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9 }}
+        className="mt-6 space-x-4"
+      >
+        <a href="/resume.pdf" className="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg">Resume</a>
+        <a href="https://www.linkedin.com/in/yourprofile" className="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg">LinkedIn</a>
+        <a href="https://github.com/yourgithub" className="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg">GitHub</a>
+      </motion.div>
+      
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1 }}
+        className="mt-10"
+      >
+        <img src="/goat-typing.gif" alt="Goat Typing" className="w-60 h-60" />
+      </motion.div>
+      
+      <motion.section
+        ref={ref}
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={inView ? { opacity: 1, scale: 1 } : {}}
+        transition={{ duration: 0.8 }}
+        className="mt-20 p-10 bg-gray-800 rounded-lg shadow-lg text-center"
+      >
+        <h2 className="text-2xl font-bold">Some Tools That I Use</h2>
+        <div className="flex flex-wrap justify-center mt-4 space-x-4">
+          <img src="/aws-logo.png" alt="AWS" className="h-12 w-12" />
+          <img src="/java-logo.png" alt="Java" className="h-12 w-12" />
+          <img src="/spring-logo.png" alt="Spring" className="h-12 w-12" />
+          <img src="/sql-logo.png" alt="SQL Database" className="h-12 w-12" />
+          <img src="/javascript-logo.png" alt="JavaScript" className="h-12 w-12" />
+          <img src="/react-logo.png" alt="React" className="h-12 w-12" />
+          <img src="/nextjs-logo.png" alt="Next.js" className="h-12 w-12" />
+        </div>
+      </motion.section>
+      
+      <motion.section
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8 }}
+        className="mt-20 p-10 bg-gray-700 rounded-lg shadow-lg text-center w-3/4"
+      >
+        <h2 className="text-2xl font-bold">Experience</h2>
+        <div className="mt-4">
+          <h3 className="text-xl font-semibold">Software Development Engineer</h3>
+          <p className="text-gray-400">Amazon Web Services (AWS)</p>
+          <p className="text-gray-400">August 2022 - Present</p>
+        </div>
+      </motion.section>
+    </div>
+  );
+}
