@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
+// use global css import file from index.js file directly rather than using custom css import
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
